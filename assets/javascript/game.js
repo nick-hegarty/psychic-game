@@ -4,7 +4,7 @@ var win = 0;
 var lose = 0;
 var guessLeft = 9;
 var randomLetter =[];
-var userChoice=[];
+var userChoice = [];
 
 gameStart();
 
@@ -15,6 +15,7 @@ var html =
 "<p>losses: " + lose + "</p>";
 
 document.querySelector("#game").innerHTML = html;
+
 
 $(document).ready(function() {
    $("#restartButton").on("click", function () {
@@ -28,34 +29,31 @@ function gameStart() {
 
 }
 
-document.onkeyup = function(event){
-	var pressedkey=event.key;
-	userChoice.push(event.key);
-	var check = (userChoice === event.key); //.indexOf(event.key);
-	checkLetter(check,event.key);
-	console.log(guessLeft, randomLetter, userChoice, userGuess, lose);
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	gameOver();
+document.onkeyup = function(event) {
+
+	var pressedkey = event.key;
+
+	userChoice.push(pressedkey);
+
+	checkLetter(pressedkey);
+	console.log(randomLetter);
+
 
 	//gameOver(); 
 }
 
 
-function checkLetter(check,key,userGuess){ //add second handle to compare LETTER selection to position 
-	if (userGuess !== randomLetter){
+function checkLetter(letterToCheck) { //add second handle to compare LETTER selection to position 
+	if(letterToCheck === randomLetter) {
+		win ++;
+		alert("you win!");
+
+	} 
+	else{
+		//you lost
 		guessLeft--;
-		man.innerHTML = "You have " + guessLeft + " lives remaining ";
 	}
-	else if (userGuess === randomLetter){
-		win++;
-		alert("oyjhjh")
-	}
+	
 }
 
-function gameOver(){
-	if(guessLeft === 0){
-		alert("try again!!");
-		lose ++;
-		lose.innerHTML = lose;
-	}
-}
+
